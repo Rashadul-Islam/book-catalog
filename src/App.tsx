@@ -1,7 +1,9 @@
+import MainLayout from "./layouts/MainLayout";
+
 function App() {
   return (
     <div>
-      <p className="bg-red-300">hi</p>
+      <MainLayout />
     </div>
   );
 }
