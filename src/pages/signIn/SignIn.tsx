@@ -1,17 +1,20 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Link } from "react-router-dom";
 import Footer from "../../layouts/Footer";
 import Navbar from "../../layouts/Navbar";
 import { useState } from "react";
+import { useSignInUserMutation } from "../../redux/features/user/userApi";
 
 const SignIn = () => {
-  interface LoginData {
-    email: string | null;
-    password: string | null;
-  }
 
-  const [loginData, setLoginData] = useState<LoginData>({
-    email: null,
-    password: null,
+  interface ILoginData {
+    email: string;
+    password: string;
+  }
+  const [signInUser, { data, isLoading }] = useSignInUserMutation();
+  const [loginData, setLoginData] = useState<ILoginData>({
+    email: "",
+    password: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +27,7 @@ const SignIn = () => {
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginData);
+    signInUser(loginData);
   };
 
   return (

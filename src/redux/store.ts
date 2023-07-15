@@ -1,10 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
+import { api } from "./api/apiSlice";
+import userReducer from './features/user/userSlice';
 
 const store = configureStore({
   reducer: {
+    [api.reducerPath]: api.reducer,
+    user: userReducer,
   },
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware().concat(api.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

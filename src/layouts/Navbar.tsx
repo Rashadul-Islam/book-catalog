@@ -36,6 +36,12 @@ const Navbar: React.FC = () => {
                 Books
               </Link>
               <Link
+                to="/add-new-books"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Add Books
+              </Link>
+              <Link
                 to="/signup"
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
               >
@@ -87,6 +93,12 @@ const Navbar: React.FC = () => {
               className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
             >
               Books
+            </Link>
+            <Link
+              to="/add-new-books"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Add Books
             </Link>
             <Link
               to="/signup"

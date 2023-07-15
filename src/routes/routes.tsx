@@ -1,11 +1,12 @@
-import { createBrowserRouter } from 'react-router-dom';
-import App from '../App';
-import SignUp from '../pages/signUp/SignUp';
-import SignIn from '../pages/signIn/SignIn';
+import { createBrowserRouter } from "react-router-dom";
+import App from "../App";
+import SignUp from "../pages/signUp/SignUp";
+import SignIn from "../pages/signIn/SignIn";
+import AddBook from "../pages/addBooks/AddBook";
 
 const routes = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     // children: [
     //   {
@@ -27,21 +28,21 @@ const routes = createBrowserRouter([
     // ],
   },
   {
-    path: '/signup',
+    path: "/signup",
     element: <SignUp />,
   },
   {
-    path: '/signin',
+    path: "/signin",
     element: <SignIn />,
   },
-//   {
-//     path: '/signup',
-//     element: <Signup />,
-//   },
-//   {
-//     path: '*',
-//     element: <NotFound />,
-//   },
+  {
+    path: "/add-new-books",
+    element: <AddBook />,
+  },
+  //   {
+  //     path: '*',
+  //     element: <NotFound />,
+  //   },
 ]);
 
 export default routes;
