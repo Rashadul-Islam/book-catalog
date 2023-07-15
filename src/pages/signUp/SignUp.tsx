@@ -1,13 +1,63 @@
 import { Link } from "react-router-dom";
 import Navbar from "../../layouts/Navbar";
 import Footer from "../../layouts/Footer";
+import { useState } from "react";
 
 const SignUp = () => {
+  interface LoginData {
+    email: string | null;
+    name: {
+      firstName: string | null;
+      lastName: string | null;
+    };
+    password: string | null;
+    rePassword: string | null;
+  }
+
+  const [signUpData, setSignUpData] = useState<LoginData>({
+    email: null,
+    name: {
+      firstName: null,
+      lastName: null,
+    },
+    password: null,
+    rePassword: null,
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setSignUpData((prevData) => {
+      if (name === "firstName" || name === "lastName") {
+        return {
+          ...prevData,
+          name: {
+            ...prevData.name,
+            [name]: value,
+          },
+        };
+      } else {
+        return {
+          ...prevData,
+          [name]: value,
+        };
+      }
+    });
+  };
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(signUpData);
+  };
+
   return (
     <div>
       <Navbar />
       <div className="w-full bg-gray-900">
-        <section className="flex flex-col h-screen md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center mx-5 md:mx-0 md:my-0">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col h-screen md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center mx-5 md:mx-0 md:my-0"
+        >
           <div className="md:w-1/3 max-w-sm">
             <img
               src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
@@ -25,12 +75,16 @@ const SignUp = () => {
                 className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
                 type="text"
                 name="firstName"
+                required
+                onChange={handleInputChange}
                 placeholder="First Name"
               />
               <input
                 className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
                 type="text"
                 name="lastName"
+                required
+                onChange={handleInputChange}
                 placeholder="Last Name"
               />
             </div>
@@ -38,18 +92,24 @@ const SignUp = () => {
               className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
               type="email"
               name="email"
+              required
+              onChange={handleInputChange}
               placeholder="Email Address"
             />
             <input
               className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
               type="password"
               name="password"
+              required
+              onChange={handleInputChange}
               placeholder="Password"
             />
             <input
               className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
               type="password"
               name="rePassword"
+              required
+              onChange={handleInputChange}
               placeholder="Retype Password"
             />
             <div className="text-center flex justify-between items-center lg:flex-row md:flex-col">
@@ -70,7 +130,7 @@ const SignUp = () => {
               </div>
             </div>
           </div>
-        </section>
+        </form>
       </div>
       <Footer />
     </div>
