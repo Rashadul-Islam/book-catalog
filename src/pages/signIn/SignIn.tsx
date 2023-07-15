@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import Navbar from "../../layouts/Navbar";
 import Footer from "../../layouts/Footer";
+import Navbar from "../../layouts/Navbar";
 
-const SignUp = () => {
+const SignIn = () => {
   return (
     <div>
       <Navbar />
@@ -20,20 +20,6 @@ const SignUp = () => {
                 Signin
               </p>
             </div>
-            <div className="flex gap-3 mb-4">
-              <input
-                className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-              />
-              <input
-                className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-              />
-            </div>
             <input
               className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
               type="email"
@@ -46,26 +32,20 @@ const SignUp = () => {
               name="password"
               placeholder="Password"
             />
-            <input
-              className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
-              type="password"
-              name="rePassword"
-              placeholder="Retype Password"
-            />
             <div className="text-center flex justify-between items-center lg:flex-row md:flex-col">
               <button
                 className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
                 type="submit"
               >
-                Signup
+                Signin
               </button>
               <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
-                Already have an account?{" "}
+                Don't have an account?{" "}
                 <Link
                   className="text-red-600 hover:underline hover:underline-offset-4"
-                  to="/signin"
+                  to="/signup"
                 >
-                  Signin
+                  Signup
                 </Link>
               </div>
             </div>
@@ -77,4 +57,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

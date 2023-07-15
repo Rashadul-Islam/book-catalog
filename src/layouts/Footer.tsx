@@ -33,7 +33,7 @@ const Footer = () => {
               <li className="mb-2">Forum</li>
             </ul>
           </div>
-          <div className="w-1/2 lg:w-1/4 mb-4">
+          <div className="w-1/2 lg:w-1/4 mb-0">
             <h4 className="text-lg font-bold mb-4">Social</h4>
             <ul className="flex items-center justify-center">
               <li className="mr-3">
