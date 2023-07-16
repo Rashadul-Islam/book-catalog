@@ -1,5 +1,6 @@
 import HeroSection from "./components/heroSection/HeroSection";
 import RecentBooks from "./components/recentBooks/RecentBooks";
+import Footer from "./layouts/Footer";
 import MainLayout from "./layouts/MainLayout";
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
       <MainLayout />
       <HeroSection />
       <RecentBooks/>
+      <Footer/>
     </div>
   );
 }

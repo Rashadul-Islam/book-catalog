@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
                 Home
               </Link>
               <Link
-                to="/all-books"
+                to="/books"
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
               >
                 Books
@@ -89,7 +89,7 @@ const Navbar: React.FC = () => {
               Home
             </Link>
             <Link
-              to="/all-books"
+              to="/books"
               className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
             >
               Books
