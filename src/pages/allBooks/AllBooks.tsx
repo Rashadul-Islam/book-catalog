@@ -3,9 +3,11 @@ import Footer from "@/layouts/Footer";
 import Navbar from "@/layouts/Navbar";
 import { useGetBooksQuery } from "@/redux/features/books/bookApi";
 import { IBook } from "@/types/bookType";
+import { useState } from "react";
 
 const AllBooks = () => {
-  const { data } = useGetBooksQuery(undefined);
+  const [serachData, setSearchData] = useState<string>("");
+  const { data } = useGetBooksQuery(`?searchTerm=${serachData}`);
   return (
     <div>
       <Navbar />
@@ -14,6 +16,7 @@ const AllBooks = () => {
           <input
             type="text"
             placeholder="Search by title, author, genre..."
+            onChange={(e) => setSearchData(e.target.value)}
             className="w-[40%] px-4 py-2 rounded-full placeholder:text-black bg-gray-100 text-black focus:outline-none focus:ring-2 focus:ring-gray-900"
           />
         </div>

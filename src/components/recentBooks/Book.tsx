@@ -16,6 +16,7 @@ const Book = ({ book }: IProps) => {
       <div className="text-center text-white">
         <h3>Title: {book?.title}</h3>
         <p>Author: {book?.author}</p>
+        <p>Genre: {book?.genre}</p>
         <p>Published on: {book?.publicationDate}</p>
       </div>
     </Link>
