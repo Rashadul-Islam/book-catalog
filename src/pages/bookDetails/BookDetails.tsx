@@ -1,16 +1,45 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import bookDetails from "@/assets/book_items.png";
 import Reviews from "@/components/reviews/Reviews";
 import Footer from "@/layouts/Footer";
 import Navbar from "@/layouts/Navbar";
-import { useSingleBookQuery } from "@/redux/features/books/bookApi";
-import { Link, useParams } from "react-router-dom";
+import {
+  useDeleteBookMutation,
+  useSingleBookQuery,
+} from "@/redux/features/books/bookApi";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { useAppSelector } from "@/redux/hook";
+import Swal from "sweetalert2";
+import { useEffect } from "react";
 
 const BookDetails = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { data } = useSingleBookQuery(id);
+  const [deleteBook, { isSuccess }] = useDeleteBookMutation();
   const { _id } = useAppSelector((state) => state.user);
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Warning",
+      text: "Do you want to delte",
+      icon: "warning",
+      confirmButtonText: "Confirm",
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteBook(id);
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/books");
+    }
+  }, [isSuccess]);
+
   return (
     <div>
       <Navbar />
@@ -26,7 +55,8 @@ const BookDetails = () => {
           <div className="flex justify-center gap-3 pb-10">
             <Link
               className="bg-white text-black px-3 py-1 rounded"
-              to="/book/edit/:data?.data?._id"
+              to={`/book/edit/${data?.data?._id}`}
+              state={data?.data}
             >
               Edit Book
             </Link>
