@@ -1,15 +1,11 @@
-import HeroSection from "./components/heroSection/HeroSection";
-import RecentBooks from "./components/recentBooks/RecentBooks";
-import Footer from "./layouts/Footer";
 import MainLayout from "./layouts/MainLayout";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <div>
+      <Toaster />
       <MainLayout />
-      <HeroSection />
-      <RecentBooks/>
-      <Footer/>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { usePostCommentMutation } from "@/redux/features/books/bookApi";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const Reviews = () => {
   const { id } = useParams();
@@ -26,7 +26,6 @@ const Reviews = () => {
 
   return (
     <div className="px-10 pb-10">
-      <Toaster />
       <h1 className="text-white py-3 text-center pt-10">Reviews</h1>
       <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
         <textarea

@@ -1,7 +1,7 @@
 import { usePostBookMutation } from "@/redux/features/books/bookApi";
 import { useAppSelector } from "@/redux/hook";
 import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const AddBookForm = () => {
   const [title, setTitle] = useState("");
@@ -35,7 +35,6 @@ const AddBookForm = () => {
 
   return (
     <div className="flex gap-5 justify-center bg-gray-900 items-center h-screen">
-      <Toaster />
       <form
         onSubmit={handleSubmit}
         className="w-[90%] lg:w-[40%] p-6 rounded shadow-lg"

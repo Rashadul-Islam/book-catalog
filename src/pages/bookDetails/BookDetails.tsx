@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import bookDetails from "@/assets/book_items.png";
 import Reviews from "@/components/reviews/Reviews";
-import Footer from "@/layouts/Footer";
-import Navbar from "@/layouts/Navbar";
 import {
   useDeleteBookMutation,
   useSingleBookQuery,
@@ -42,7 +40,6 @@ const BookDetails = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="bg-gray-900 h-[800px]">
         <img src={bookDetails} alt="" className="w-[20%] mx-auto pt-[100px]" />
         <div className="flex flex-col justify-center text-white text-center pt-10 pb-5">
@@ -81,7 +78,6 @@ const BookDetails = () => {
         <hr />
         <Reviews />
       </div>
-      <Footer />
     </div>
   );
 };

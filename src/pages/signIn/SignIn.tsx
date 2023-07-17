@@ -1,7 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from "react-router-dom";
-import Footer from "../../layouts/Footer";
-import Navbar from "../../layouts/Navbar";
 import { useEffect, useState } from "react";
 import { useSignInUserMutation } from "../../redux/features/user/userApi";
 import { useAppDispatch } from "@/redux/hook";
@@ -41,7 +39,6 @@ const SignIn = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="w-full bg-gray-900">
         <section className="flex flex-col h-screen md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center mx-5 md:mx-0 md:my-0">
           <div className="md:w-1/3 max-w-sm">
@@ -92,7 +89,6 @@ const SignIn = () => {
           </form>
         </section>
       </div>
-      <Footer />
     </div>
   );
 };

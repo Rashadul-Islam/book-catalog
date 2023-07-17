@@ -1,10 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from "react-router-dom";
-import Navbar from "../../layouts/Navbar";
-import Footer from "../../layouts/Footer";
 import { useState, useEffect } from "react";
 import { useSignUpUserMutation } from "@/redux/features/user/userApi";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [signUpUser, { data, isSuccess, isError }] = useSignUpUserMutation();
@@ -78,8 +76,6 @@ const SignUp = () => {
 
   return (
     <div>
-      <Toaster />
-      <Navbar />
       <div className="w-full bg-gray-900">
         <form
           id="form"
@@ -165,7 +161,6 @@ const SignUp = () => {
           </div>
         </form>
       </div>
-      <Footer />
     </div>
   );
 };

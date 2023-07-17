@@ -1,11 +1,11 @@
-import Footer from "@/layouts/Footer";
-import Navbar from "@/layouts/Navbar";
-import { useLocation } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { IBook } from "@/types/bookType";
 import { useEditBookMutation } from "@/redux/features/books/bookApi";
 
 const EditBook = () => {
+  const navigate = useNavigate();
   const { state } = useLocation();
   const [editData, setEditData] = useState<IBook>(state);
   const [editBook, { isSuccess }] = useEditBookMutation();
@@ -26,11 +26,16 @@ const EditBook = () => {
     };
     editBook(option);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/books");
+    }
+  }, [isSuccess]);
+
   return (
     <div>
-      <Navbar />
       <div className="flex gap-5 justify-center bg-gray-900 items-center h-screen">
-        {/* <Toaster /> */}
         <form
           onSubmit={handleSubmit}
           className="w-[90%] lg:w-[40%] p-6 rounded shadow-lg"
@@ -116,7 +121,6 @@ const EditBook = () => {
           </div>
         </form>
       </div>
-      <Footer />
     </div>
   );
 };

@@ -1,6 +1,4 @@
 import Book from "@/components/recentBooks/Book";
-import Footer from "@/layouts/Footer";
-import Navbar from "@/layouts/Navbar";
 import { useGetBooksQuery } from "@/redux/features/books/bookApi";
 import { IBook } from "@/types/bookType";
 import { Pagination } from "@mui/material";
@@ -45,7 +43,6 @@ const AllBooks = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="px-10 bg-gray-900 pb-20 pt-[100px]">
         <div className="flex justify-center pb-5">
           <input
@@ -95,7 +92,6 @@ const AllBooks = () => {
           />
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
