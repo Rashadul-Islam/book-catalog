@@ -1,27 +1,31 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from "react-router-dom";
 import Navbar from "../../layouts/Navbar";
 import Footer from "../../layouts/Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSignUpUserMutation } from "@/redux/features/user/userApi";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignUp = () => {
+  const [signUpUser, { data, isSuccess, isError }] = useSignUpUserMutation();
   interface LoginData {
-    email: string | null;
+    email: string | "";
     name: {
-      firstName: string | null;
-      lastName: string | null;
+      firstName: string | "";
+      lastName: string | "";
     };
-    password: string | null;
-    rePassword: string | null;
+    password: string | "";
+    rePassword: string | "";
   }
 
   const [signUpData, setSignUpData] = useState<LoginData>({
-    email: null,
+    email: "",
     name: {
-      firstName: null,
-      lastName: null,
+      firstName: "",
+      lastName: "",
     },
-    password: null,
-    rePassword: null,
+    password: "",
+    rePassword: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,14 +51,38 @@ const SignUp = () => {
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(signUpData);
+    if (signUpData.password !== signUpData.rePassword) {
+      toast.error("Both password should be same");
+    } else {
+      signUpUser(signUpData);
+    }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(`${data?.message}`);
+      setSignUpData({
+        email: "",
+        name: {
+          firstName: "",
+          lastName: "",
+        },
+        password: "",
+        rePassword: "",
+      });
+    }
+    if (isError) {
+      toast.error("Got error..!");
+    }
+  }, [isSuccess, isError]);
 
   return (
     <div>
+      <Toaster />
       <Navbar />
       <div className="w-full bg-gray-900">
         <form
+          id="form"
           onSubmit={handleSubmit}
           className="flex flex-col h-screen md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center mx-5 md:mx-0 md:my-0"
         >
@@ -75,6 +103,7 @@ const SignUp = () => {
                 className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
                 type="text"
                 name="firstName"
+                value={signUpData?.name?.firstName}
                 required
                 onChange={handleInputChange}
                 placeholder="First Name"
@@ -83,6 +112,7 @@ const SignUp = () => {
                 className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
                 type="text"
                 name="lastName"
+                value={signUpData?.name?.lastName}
                 required
                 onChange={handleInputChange}
                 placeholder="Last Name"
@@ -92,6 +122,7 @@ const SignUp = () => {
               className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
               type="email"
               name="email"
+              value={signUpData?.email}
               required
               onChange={handleInputChange}
               placeholder="Email Address"
@@ -100,6 +131,7 @@ const SignUp = () => {
               className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
               type="password"
               name="password"
+              value={signUpData?.password}
               required
               onChange={handleInputChange}
               placeholder="Password"
@@ -110,6 +142,7 @@ const SignUp = () => {
               name="rePassword"
               required
               onChange={handleInputChange}
+              value={signUpData?.rePassword}
               placeholder="Retype Password"
             />
             <div className="text-center flex justify-between items-center lg:flex-row md:flex-col">

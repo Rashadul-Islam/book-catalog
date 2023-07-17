@@ -1,11 +1,12 @@
 import { usePostCommentMutation } from "@/redux/features/books/bookApi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const Reviews = () => {
   const { id } = useParams();
   const [comment, setComment] = useState("");
-  const [postComment] = usePostCommentMutation();
+  const [postComment, { isError }] = usePostCommentMutation();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,9 +18,16 @@ const Reviews = () => {
     setComment("");
   };
 
+  useEffect(() => {
+    if (isError) {
+      toast.error("Please login for comment");
+    }
+  }, [isError]);
+
   return (
     <div className="px-10 pb-10">
-      <h1 className="text-white py-3 text-center">Reviews</h1>
+      <Toaster />
+      <h1 className="text-white py-3 text-center pt-10">Reviews</h1>
       <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
         <textarea
           rows={3}

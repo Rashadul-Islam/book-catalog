@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
@@ -9,16 +10,21 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const { token } = useAppSelector((state) => state.user);
-  const [logoutUser, { data }] = useLogoutUserMutation();
-console.log(data)
+  const [logoutUser, { isSuccess }] = useLogoutUserMutation();
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
 
   const handleClick = () => {
-    logoutUser();
-    // dispatch(userLogout());
+    logoutUser(null);
+    console.log("first");
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(userLogout());
+    }
+  }, [isSuccess]);
 
   return (
     <nav className="bg-gray-900 w-full fixed top-0 backdrop-blur-lg z-10">

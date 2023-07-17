@@ -1,4 +1,3 @@
-import { RootState } from "@/redux/store";
 import { api } from "../../api/apiSlice";
 
 const userApi = api.injectEndpoints({
@@ -20,16 +19,7 @@ const userApi = api.injectEndpoints({
     logoutUser: builder.mutation({
       query: () => ({
         url: "auth/logout",
-        method: "POST",
-        prepareHeaders: (headers: Headers, { getState }) => {
-          const token = (getState() as RootState).user.token;
-          console.log(token)
-          if (token) {
-            headers.set("authorization", `Bearer ${token}`);
-          }
-
-          return headers;
-        },
+        method: "POST",   
       }),
     }),
   }),
