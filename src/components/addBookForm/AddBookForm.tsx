@@ -1,19 +1,41 @@
-import { useState } from "react";
+import { usePostBookMutation } from "@/redux/features/books/bookApi";
+import { useAppSelector } from "@/redux/hook";
+import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddBookForm = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
   const [publicationDate, setPublicationDate] = useState("");
+  const { _id } = useAppSelector((state) => state.user);
+  const [postBook, { data }] = usePostBookMutation();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Form submitted");
+    const options = {
+      title: title,
+      author: author,
+      genre: genre,
+      publicationDate: publicationDate,
+      user: _id,
+    };
+    postBook(options);
   };
+
+  useEffect(() => {
+    if (data?.message) {
+      toast.success(`${data?.message}`);
+      setTitle("");
+      setAuthor("");
+      setGenre("");
+      setPublicationDate("");
+    }
+  }, [data]);
 
   return (
     <div className="flex gap-5 justify-center bg-gray-900 items-center h-screen">
+      <Toaster />
       <form
         onSubmit={handleSubmit}
         className="w-[90%] lg:w-[40%] p-6 rounded shadow-lg"

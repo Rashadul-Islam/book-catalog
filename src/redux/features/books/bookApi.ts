@@ -3,17 +3,18 @@ import { api } from "../../api/apiSlice";
 const bookApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBooks: builder.query({
-      query: (filter: string) => `/books${filter}`,
+      query: (filter: string) => `books${filter}`,
     }),
     recentBooks: builder.query({
-      query: () => "/books/recent-books",
+      query: () => "books/recent-books",
     }),
     singleBook: builder.query({
-      query: (id: string) => `/books/${id}`,
+      query: (id) => `books/${id}`,
+      providesTags: ["comments"],
     }),
     postBook: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `/comment/${id}`,
+      query: (data) => ({
+        url: "books/create-book",
         method: "POST",
         body: data,
       }),
@@ -21,15 +22,11 @@ const bookApi = api.injectEndpoints({
     }),
     postComment: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/comment/${id}`,
+        url: `books/comment/${id}`,
         method: "POST",
         body: data,
       }),
       invalidatesTags: ["comments"],
-    }),
-    getComment: builder.query({
-      query: (id) => `/comment/${id}`,
-      providesTags: ["comments"],
     }),
   }),
 });
@@ -38,7 +35,6 @@ export const {
   useGetBooksQuery,
   useSingleBookQuery,
   usePostCommentMutation,
-  useGetCommentQuery,
   usePostBookMutation,
   useRecentBooksQuery,
 } = bookApi;

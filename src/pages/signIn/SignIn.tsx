@@ -1,17 +1,20 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from "react-router-dom";
 import Footer from "../../layouts/Footer";
 import Navbar from "../../layouts/Navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSignInUserMutation } from "../../redux/features/user/userApi";
+import { useAppDispatch } from "@/redux/hook";
+import { userSignIn } from "@/redux/features/user/userSlice";
 
 const SignIn = () => {
+  const dispatch = useAppDispatch();
 
   interface ILoginData {
     email: string;
     password: string;
   }
-  const [signInUser, { data, isLoading }] = useSignInUserMutation();
+  const [signInUser, { data }] = useSignInUserMutation();
   const [loginData, setLoginData] = useState<ILoginData>({
     email: "",
     password: "",
@@ -29,6 +32,12 @@ const SignIn = () => {
     e.preventDefault();
     signInUser(loginData);
   };
+
+  useEffect(() => {
+    if (data?.data?.accessToken) {
+      dispatch(userSignIn(data?.data));
+    }
+  }, [data]);
 
   return (
     <div>

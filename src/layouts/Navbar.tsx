@@ -1,12 +1,23 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { useLogoutUserMutation } from "@/redux/features/user/userApi";
+import { userLogout } from "@/redux/features/user/userSlice";
 
 const Navbar = () => {
+  const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
-
+  const { token } = useAppSelector((state) => state.user);
+  const [logoutUser, { data }] = useLogoutUserMutation();
+console.log(data)
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleClick = () => {
+    logoutUser();
+    // dispatch(userLogout());
   };
 
   return (
@@ -35,24 +46,38 @@ const Navbar = () => {
               >
                 Books
               </Link>
-              <Link
-                to="/add-new-books"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Add Books
-              </Link>
-              <Link
-                to="/signup"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Signup
-              </Link>
-              <Link
-                to="/signin"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Signin
-              </Link>
+
+              {token ? (
+                <>
+                  <Link
+                    to="/add-new-books"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Add Books
+                  </Link>
+                  <p
+                    onClick={handleClick}
+                    className="cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Logout
+                  </p>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/signup"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Signup
+                  </Link>
+                  <Link
+                    to="/signin"
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Signin
+                  </Link>
+                </>
+              )}
             </div>
           </div>
           <div className="-mr-2 flex md:hidden">
@@ -94,24 +119,37 @@ const Navbar = () => {
             >
               Books
             </Link>
-            <Link
-              to="/add-new-books"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Add Books
-            </Link>
-            <Link
-              to="/signup"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Signup
-            </Link>
-            <Link
-              to="/signin"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Signin
-            </Link>
+            {token ? (
+              <div className="flex flex-col">
+                <Link
+                  to="/add-new-books"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Add Books
+                </Link>
+                <p
+                  onClick={handleClick}
+                  className="cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Logout
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col">
+                <Link
+                  to="/signup"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Signup
+                </Link>
+                <Link
+                  to="/signin"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Signin
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       )}
