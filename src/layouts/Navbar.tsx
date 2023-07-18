@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useLogoutUserMutation } from "@/redux/features/user/userApi";
 import { userLogout } from "@/redux/features/user/userSlice";
 
 const Navbar = () => {
+  const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const { token } = useAppSelector((state) => state.user);
