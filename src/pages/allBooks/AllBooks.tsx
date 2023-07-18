@@ -15,7 +15,7 @@ const AllBooks = () => {
   const { data } = useGetBooksQuery(
     `?searchTerm=${serachData}&page=${page}&${readyFilter}`
   );
-  const handleChange = (event, value: number) => {
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 

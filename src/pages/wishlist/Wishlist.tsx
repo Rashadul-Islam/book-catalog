@@ -6,7 +6,7 @@ import { Pagination } from "@mui/material";
 const Wishlist = () => {
   const [page, setPage] = useState(1);
   const { data } = useWishlistQuery(`page=${page}`);
-  const handleChange = (event, value: number) => {
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 

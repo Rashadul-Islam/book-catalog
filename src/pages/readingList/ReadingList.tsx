@@ -10,7 +10,7 @@ const ReadingList = () => {
   const [page, setPage] = useState(1);
   const { data } = useReadingListQuery(`page=${page}`);
   const [updateReadinglist] = useUpdateReadinglistMutation();
-  const handleChange = (event, value: number) => {
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
