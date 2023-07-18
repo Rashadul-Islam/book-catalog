@@ -3,24 +3,39 @@ import bookItem from "../../assets/book_items.png";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "@/redux/hook";
 import { toast } from "react-hot-toast";
+import { useCreateWishlistMutation } from "@/redux/features/wishlist/wishlistApi";
+import { useEffect } from "react";
 
 interface IProps {
   book: IBook;
 }
 
 const Book = ({ book }: IProps) => {
-  const { token } = useAppSelector((state) => state.user);
+  const { _id } = useAppSelector((state) => state.user);
+  const [createWishlist, { data }] = useCreateWishlistMutation();
 
   const handleWishList = () => {
-    if (!token) {
+    if (!_id) {
       toast.error("Please login first");
+    } else {
+      const options = {
+        book: book?._id,
+        user: _id,
+      };
+      createWishlist(options);
     }
   };
   const handleReadingList = () => {
-    if (!token) {
+    if (!_id) {
       toast.error("Please login first");
     }
   };
+
+  useEffect(() => {
+    if (data?.message) {
+      toast.success(`${data?.message}`);
+    }
+  }, [data]);
 
   return (
     <Link
