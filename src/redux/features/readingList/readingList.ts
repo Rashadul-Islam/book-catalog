@@ -4,15 +4,15 @@ const readinglistApi = api.injectEndpoints({
   endpoints: (builder) => ({
     createReadinglist: builder.mutation({
       query: (userData) => ({
-        url: "wishlist/create-wishlist",
+        url: "readinglist/create-wishlist",
         method: "POST",
         body: userData,
       }),
-      invalidatesTags: ["wishlist"],
+      invalidatesTags: ["reading"],
     }),
     readingList: builder.query({
-      query: (id) => `wishlist/${id}`,
-      providesTags: ["wishlist"],
+      query: (id) => `readinglist/${id}`,
+      providesTags: ["reading"],
     }),
   }),
 });

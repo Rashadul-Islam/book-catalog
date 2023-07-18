@@ -5,6 +5,7 @@ import { useAppSelector } from "@/redux/hook";
 import { toast } from "react-hot-toast";
 import { useCreateWishlistMutation } from "@/redux/features/wishlist/wishlistApi";
 import { useEffect } from "react";
+import { useCreateReadinglistMutation } from "@/redux/features/readingList/readingList";
 
 interface IProps {
   book: IBook;
@@ -13,6 +14,8 @@ interface IProps {
 const Book = ({ book }: IProps) => {
   const { _id } = useAppSelector((state) => state.user);
   const [createWishlist, { data }] = useCreateWishlistMutation();
+  const [createReadinglist, { data: readingData }] =
+    useCreateReadinglistMutation();
 
   const handleWishList = () => {
     if (!_id) {
@@ -28,6 +31,12 @@ const Book = ({ book }: IProps) => {
   const handleReadingList = () => {
     if (!_id) {
       toast.error("Please login first");
+    } else {
+      const options = {
+        book: book?._id,
+        user: _id,
+      };
+      createReadinglist(options);
     }
   };
 
@@ -36,6 +45,12 @@ const Book = ({ book }: IProps) => {
       toast.success(`${data?.message}`);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (readingData?.message) {
+      toast.success(`${readingData?.message}`);
+    }
+  }, [readingData]);
 
   return (
     <Link

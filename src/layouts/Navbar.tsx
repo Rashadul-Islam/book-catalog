@@ -57,6 +57,18 @@ const Navbar = () => {
               >
                 Add Books
               </Link>
+              <Link
+                to="/wishlist"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Wishlist
+              </Link>
+              <Link
+                to="/readinglist"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Reading List
+              </Link>
               {token ? (
                 <>
                   <p
@@ -128,6 +140,18 @@ const Navbar = () => {
               className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
             >
               Add Books
+            </Link>
+            <Link
+              to="/wishlist"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Wishlist
+            </Link>
+            <Link
+              to="/readinglist"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Reading List
             </Link>
             {token ? (
               <div className="flex flex-col">
