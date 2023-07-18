@@ -11,7 +11,7 @@ const wishlistApi = api.injectEndpoints({
       invalidatesTags: ["wishlist"],
     }),
     wishlist: builder.query({
-      query: (id) => `wishlist/${id}`,
+      query: (id) => `wishlist?${id}`,
       providesTags: ["wishlist"],
     }),
   }),

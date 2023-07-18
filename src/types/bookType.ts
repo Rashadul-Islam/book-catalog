@@ -9,3 +9,10 @@ export type IBook = {
   user: string | IUser;
   _id?: string;
 };
+
+export type IWish = {
+  _id: string;
+  book: IBook;
+  user: string;
+  status: string;
+};

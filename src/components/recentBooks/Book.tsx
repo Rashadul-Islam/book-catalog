@@ -5,7 +5,7 @@ import { useAppSelector } from "@/redux/hook";
 import { toast } from "react-hot-toast";
 import { useCreateWishlistMutation } from "@/redux/features/wishlist/wishlistApi";
 import { useEffect } from "react";
-import { useCreateReadinglistMutation } from "@/redux/features/readingList/readingList";
+import { useCreateReadinglistMutation } from "@/redux/features/readingList/ReadingList";
 
 interface IProps {
   book: IBook;
