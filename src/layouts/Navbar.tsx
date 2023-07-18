@@ -17,7 +17,6 @@ const Navbar = () => {
 
   const handleClick = () => {
     logoutUser(null);
-    console.log("first");
   };
 
   useEffect(() => {
@@ -52,15 +51,14 @@ const Navbar = () => {
               >
                 Books
               </Link>
-
+              <Link
+                to="/add-new-books"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Add Books
+              </Link>
               {token ? (
                 <>
-                  <Link
-                    to="/add-new-books"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Add Books
-                  </Link>
                   <p
                     onClick={handleClick}
                     className="cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -125,14 +123,14 @@ const Navbar = () => {
             >
               Books
             </Link>
+            <Link
+              to="/add-new-books"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Add Books
+            </Link>
             {token ? (
               <div className="flex flex-col">
-                <Link
-                  to="/add-new-books"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Add Books
-                </Link>
                 <p
                   onClick={handleClick}
                   className="cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"

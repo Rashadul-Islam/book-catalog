@@ -14,6 +14,6 @@ export const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ["comments"],
+  tagTypes: ["comments", "wishlist", "reading"],
   endpoints: () => ({}),
 });

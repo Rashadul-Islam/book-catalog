@@ -11,8 +11,8 @@ export default function PrivateRoute({ children }: IProps) {
 
   const { pathname } = useLocation();
 
-  if (token === "") {
-    return <Navigate to="/signin" state={{ path: pathname }} />;
+  if (!token) {
+    return <Navigate to="/signin" state={{ from: pathname }} replace />;
   }
 
   return children;
